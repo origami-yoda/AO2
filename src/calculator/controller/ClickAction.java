@@ -1,8 +1,6 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
 import calculator.view.CalculatorGUI;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

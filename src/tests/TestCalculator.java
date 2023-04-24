@@ -1,11 +1,10 @@
 package tests;
 
 import org.junit.Test;
-import calculator.model.Calculator;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestEnterNumbers {
+public class TestCalculator {
 
     @Test
     public void testCalculator() {

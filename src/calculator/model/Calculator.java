@@ -2,47 +2,69 @@ package calculator.model;
 
 public class Calculator {
 
-    public Calculator(){
+    private CalculatorState currentState;
+    private double currentNumber;
+    private double storedNumber;
 
+    public Calculator() {
+        currentState = new InitialState(this);
+    }
+
+    public void setState(CalculatorState state) {
+        this.currentState = state;
+    }
+
+    public void setCurrentNumber(double number) {
+        this.currentNumber = number;
+    }
+
+    public void setStoredNumber(double number) {
+        this.storedNumber = number;
+    }
+
+    public double getCurrentNumber() {
+        return this.currentNumber;
+    }
+
+    public double getStoredNumber() {
+        return this.storedNumber;
     }
 
     // Accessed by View. You should edit this method as you build functionality
     public double displayNumber() {
         // TODO
-        return 0.0;
+        return currentNumber;
     }
 
     public void clearPressed() {
-        // TODO
+        currentState.clearPressed();
     }
 
     public void numberPressed(int number) {
-        // TODO
+        currentState.numberPressed(number);
     }
 
     public void dividePressed() {
-        // TODO
+        currentState.dividePressed();
     }
 
     public void multiplyPressed() {
-        // TODO
+        currentState.multiplyPressed();
     }
 
     public void subtractPressed() {
-        // TODO
+        currentState.subtractPressed();
     }
 
     public void addPressed() {
-        // TODO
+        currentState.addPressed();
     }
 
     public void equalsPressed() {
-        // TODO
+        currentState.equalsPressed();
     }
 
     public void decimalPressed() {
-        // TODO
+        currentState.decimalPressed();
     }
-
-
 }

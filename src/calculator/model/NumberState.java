@@ -3,7 +3,7 @@ package calculator.model;
 public class NumberState implements CalculatorState {
 
     private Calculator calculator;
-    private double currentNumber;
+    private double currentNumber    ;
 
     public NumberState(Calculator calculator) {
         this.calculator = calculator;
@@ -24,30 +24,26 @@ public class NumberState implements CalculatorState {
 
     @Override
     public void dividePressed() {
-        calculator.setState(new DivideState(this.calculator));
-        calculator.setStoredNumber(this.currentNumber);
-        calculator.setCurrentNumber(0.0);
+        this.calculator.setState(new DivideState(this.calculator));
+        this.calculator.setStoredNumber(this.currentNumber);
     }
 
     @Override
     public void multiplyPressed() {
         calculator.setState(new MultiplyState(this.calculator));
         calculator.setStoredNumber(this.currentNumber);
-        calculator.setCurrentNumber(0.0);
     }
 
     @Override
     public void subtractPressed() {
         calculator.setState(new SubtractState(this.calculator));
         calculator.setStoredNumber(this.currentNumber);
-        calculator.setCurrentNumber(0.0);
     }
 
     @Override
     public void addPressed() {
         calculator.setState(new AddState(this.calculator));
         calculator.setStoredNumber(this.currentNumber);
-        calculator.setCurrentNumber(0.0);
     }
 
     @Override

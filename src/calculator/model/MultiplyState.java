@@ -14,6 +14,7 @@ public class MultiplyState implements CalculatorState{
 
     @Override
     public void numberPressed(int number) {
+        this.calculator.setCurrentNumber(0.0);
         double currentNumber = this.calculator.getCurrentNumber();
         currentNumber = currentNumber * 10 + number;
         calculator.setCurrentNumber(currentNumber);

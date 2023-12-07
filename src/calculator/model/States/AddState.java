@@ -1,13 +1,14 @@
-package calculator.model;
+package calculator.model.States;
 
-public class MultiplyState implements CalculatorState {
+import calculator.model.*;
+
+public class AddState implements CalculatorState {
     private Calculator calculator;
 
-    public MultiplyState(Calculator calculator) {
+    public AddState(Calculator calculator) {
         this.calculator = calculator;
         this.calculator.setCurrentNumber(0);
     }
-
     @Override
     public void clearPressed() {
         this.calculator.setCurrentNumber(0);
@@ -27,6 +28,8 @@ public class MultiplyState implements CalculatorState {
 
     @Override
     public void multiplyPressed() {
+        this.calculator.setStoredNumber(this.calculator.getCurrentNumber());
+        this.calculator.setState(new MultiplyState(this.calculator));
     }
 
     @Override
@@ -37,17 +40,18 @@ public class MultiplyState implements CalculatorState {
 
     @Override
     public void addPressed() {
-        this.calculator.setStoredNumber(this.calculator.getCurrentNumber());
-        this.calculator.setState(new AddState(this.calculator));
     }
 
     @Override
     public void equalsPressed() {
-        this.calculator.setCurrentNumber(this.calculator.getStoredNumber() * this.calculator.getCurrentNumber());
+        double result = this.calculator.getStoredNumber() + this.calculator.getCurrentNumber();
+        double operand = this.calculator.getCurrentNumber();
+        this.calculator.setCurrentNumber(result);
+        this.calculator.setState(new EqualsState(this.calculator, this, operand, result));
     }
 
     @Override
     public void decimalPressed() {
-        this.calculator.setState(new DecimalState(this.calculator));
+        this.calculator.setState(new DecimalState(this.calculator, this));
     }
 }

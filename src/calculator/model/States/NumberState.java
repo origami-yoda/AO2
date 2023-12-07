@@ -1,11 +1,15 @@
-package calculator.model;
+package calculator.model.States;
 
-public class SubtractState implements CalculatorState {
+import calculator.model.Calculator;
+
+public class NumberState implements CalculatorState {
+
     private Calculator calculator;
+    private double currentNumber;
 
-    public SubtractState(Calculator calculator) {
+    public NumberState(Calculator calculator) {
         this.calculator = calculator;
-        this.calculator.setCurrentNumber(0);
+        this.currentNumber = this.calculator.getCurrentNumber();
     }
 
     @Override
@@ -16,39 +20,40 @@ public class SubtractState implements CalculatorState {
 
     @Override
     public void numberPressed(int number) {
-        this.calculator.setCurrentNumber(this.calculator.getCurrentNumber() * 10 + number);
+        this.currentNumber = this.currentNumber * 10 + number;
+        calculator.setCurrentNumber(this.currentNumber);
     }
 
     @Override
     public void dividePressed() {
-        this.calculator.setStoredNumber(this.calculator.getCurrentNumber());
         this.calculator.setState(new DivideState(this.calculator));
+        this.calculator.setStoredNumber(this.currentNumber);
     }
 
     @Override
     public void multiplyPressed() {
-        this.calculator.setStoredNumber(this.calculator.getCurrentNumber());
         this.calculator.setState(new MultiplyState(this.calculator));
+        this.calculator.setStoredNumber(this.currentNumber);
     }
 
     @Override
     public void subtractPressed() {
+        this.calculator.setState(new SubtractState(this.calculator));
+        this.calculator.setStoredNumber(this.currentNumber);
     }
 
     @Override
     public void addPressed() {
-        this.calculator.setStoredNumber(this.calculator.getCurrentNumber());
         this.calculator.setState(new AddState(this.calculator));
+        this.calculator.setStoredNumber(this.currentNumber);
     }
 
     @Override
     public void equalsPressed() {
-        this.calculator.setCurrentNumber(this.calculator.getStoredNumber() - this.calculator.getCurrentNumber());
-        this.calculator.setState(new EqualsState(this.calculator, this));
     }
 
     @Override
     public void decimalPressed() {
-        this.calculator.setState(new DecimalState(this.calculator));
+        this.calculator.setState(new DecimalState(this.calculator, this));
     }
 }

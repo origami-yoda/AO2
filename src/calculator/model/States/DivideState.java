@@ -1,4 +1,6 @@
-package calculator.model;
+package calculator.model.States;
+
+import calculator.model.Calculator;
 
 public class DivideState implements CalculatorState {
     private Calculator calculator;
@@ -43,11 +45,14 @@ public class DivideState implements CalculatorState {
 
     @Override
     public void equalsPressed() {
-        this.calculator.setCurrentNumber(this.calculator.getStoredNumber() / this.calculator.getCurrentNumber());
+        double result = this.calculator.getStoredNumber() / this.calculator.getCurrentNumber();
+        double operand = this.calculator.getCurrentNumber();
+        this.calculator.setCurrentNumber(result);
+        this.calculator.setState(new EqualsState(this.calculator, this, operand, result));
     }
 
     @Override
     public void decimalPressed() {
-        this.calculator.setState(new DecimalState(this.calculator));
+        this.calculator.setState(new DecimalState(this.calculator, this));
     }
 }

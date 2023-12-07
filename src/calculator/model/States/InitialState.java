@@ -1,4 +1,6 @@
-package calculator.model;
+package calculator.model.States;
+
+import calculator.model.Calculator;
 
 public class InitialState implements CalculatorState {
 
@@ -41,6 +43,6 @@ public class InitialState implements CalculatorState {
     @Override
     public void decimalPressed() {
         calculator.setCurrentNumber(0);
-        calculator.setState(new DecimalState(this.calculator));
+        calculator.setState(new DecimalState(this.calculator, this));
     }
 }

@@ -1,14 +1,18 @@
-package calculator.model;
+package calculator.model.States;
+
+import calculator.model.Calculator;
 
 public class DecimalState implements CalculatorState {
 
     private Calculator calculator;
     private String currNumber;
+    private CalculatorState prevState;
 
-    public DecimalState(Calculator calculator) {
+    public DecimalState(Calculator calculator, CalculatorState prevState) {
         this.calculator = calculator;
         String number = this.calculator.getCurrentNumber() + "";
         this.currNumber = number.substring(0, number.length()-1);
+        this.prevState = prevState;
     }
 
     @Override
@@ -50,6 +54,8 @@ public class DecimalState implements CalculatorState {
 
     @Override
     public void equalsPressed() {
+        this.calculator.setState(prevState);
+        this.calculator.equalsPressed();
     }
 
     @Override

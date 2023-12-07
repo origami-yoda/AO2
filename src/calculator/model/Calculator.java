@@ -1,5 +1,8 @@
 package calculator.model;
 
+import calculator.model.States.CalculatorState;
+import calculator.model.States.InitialState;
+
 public class Calculator {
 
     private CalculatorState currentState;
@@ -32,7 +35,6 @@ public class Calculator {
 
     // Accessed by View. You should edit this method as you build functionality
     public double displayNumber() {
-        // TODO
         return currentNumber;
     }
 

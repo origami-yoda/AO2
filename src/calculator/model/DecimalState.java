@@ -3,23 +3,25 @@ package calculator.model;
 public class DecimalState implements CalculatorState {
 
     private Calculator calculator;
+    private String currNumber;
 
     public DecimalState(Calculator calculator) {
         this.calculator = calculator;
+        String number = this.calculator.getCurrentNumber() + "";
+        this.currNumber = number.substring(0, number.length()-1);
     }
 
     @Override
     public void clearPressed() {
-        this.calculator.setCurrentNumber(0.0);
+        this.calculator.setCurrentNumber(0);
         this.calculator.setState(new InitialState(this.calculator));
     }
 
     @Override
     public void numberPressed(int number) {
-        double currentNumber = this.calculator.getCurrentNumber();
-        double newNumber = currentNumber * 10 + number;
-        this.calculator.setCurrentNumber(newNumber);
-        this.calculator.setState(new DecimalNumberState(this.calculator));
+        String newNumber = this.currNumber + number;
+        this.currNumber = newNumber;
+        this.calculator.setCurrentNumber(Double.parseDouble(newNumber));
     }
 
     @Override
@@ -48,7 +50,6 @@ public class DecimalState implements CalculatorState {
 
     @Override
     public void equalsPressed() {
-        this.calculator.setState(new ResultState(this.calculator));
     }
 
     @Override

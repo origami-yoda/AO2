@@ -1,25 +1,22 @@
 package calculator.model;
 
-public class DivideState implements CalculatorState{
-
+public class DivideState implements CalculatorState {
     private Calculator calculator;
 
     public DivideState(Calculator calculator) {
         this.calculator = calculator;
+        this.calculator.setCurrentNumber(0);
     }
+
     @Override
     public void clearPressed() {
-        this.calculator.setCurrentNumber(0.0);
+        this.calculator.setCurrentNumber(0);
         this.calculator.setState(new InitialState(this.calculator));
     }
 
     @Override
     public void numberPressed(int number) {
-        this.calculator.setCurrentNumber(0.0);
-        double currentNumber = this.calculator.getCurrentNumber();
-        currentNumber = currentNumber * 10 + number;
-        calculator.setCurrentNumber(currentNumber);
-        calculator.setState(new NumberState(this.calculator));
+        this.calculator.setCurrentNumber(this.calculator.getCurrentNumber() * 10 + number);
     }
 
     @Override
@@ -47,7 +44,6 @@ public class DivideState implements CalculatorState{
     @Override
     public void equalsPressed() {
         this.calculator.setCurrentNumber(this.calculator.getStoredNumber() / this.calculator.getCurrentNumber());
-        this.calculator.setState(new ResultState(this.calculator));
     }
 
     @Override

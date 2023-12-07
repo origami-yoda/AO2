@@ -1,15 +1,17 @@
 package calculator.model;
 
-public class InitialState implements CalculatorState {
+public class EqualsState implements CalculatorState {
 
     private Calculator calculator;
+    private CalculatorState prevState;
 
-    public InitialState(Calculator calculator) {
+    public EqualsState(Calculator calculator, CalculatorState prevState) {
         this.calculator = calculator;
+        this.prevState = prevState;
     }
-
     @Override
     public void clearPressed() {
+
     }
 
     @Override
@@ -36,11 +38,11 @@ public class InitialState implements CalculatorState {
 
     @Override
     public void equalsPressed() {
+
     }
 
     @Override
     public void decimalPressed() {
-        calculator.setCurrentNumber(0);
-        calculator.setState(new DecimalState(this.calculator));
+
     }
 }
